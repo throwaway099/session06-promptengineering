@@ -1,43 +1,73 @@
-import math
-d=[["Rahul",78,88,92],["Priya",65,71,69],["Amit",90,94,85],
-["Sneha",55,60,58],["Vikram",82,79,88]]
-def f(x):
-    t = 0
-    for i in range(1,len(x)):
-        t=t+x[i]
-    return t
+SUBJECT_COUNT = 3
+
+students = [
+    ["Rahul", 78, 88, 92],
+    ["Priya", 65, 71, 69],
+    ["Amit", 90, 94, 85],
+    ["Sneha", 55, 60, 58],
+    ["Vikram", 82, 79, 88],
+]
+
+
+def total_marks(student):
+    """Return the sum of one student's subject marks."""
+    total = 0
+    for index in range(1, len(student)):
+        total = total + student[index]
+    return total
+
+
+def average(student):
+    """Return one student's average marks across all subjects."""
+    return total_marks(student) / SUBJECT_COUNT
+
+
+def count_students_above_class_average(student_list):
+    """Return how many students have an average above the class average."""
+    average_sum = 0
+    for student in student_list:
+        average_sum = average_sum + average(student)
+    class_average_value = average_sum / len(student_list)
+
+    above_average_count = 0
+    for student in student_list:
+        if average(student) > class_average_value:
+            above_average_count = above_average_count + 1
+    return above_average_count
+
 
 print("REPORT")
 
-for i in range(0,len(d)):
-    s=f(d[i])
-    a=s/3
-    if a >= 90:
-        g="A"
-    elif a>=80:
-        g="B"
-    elif a>=70:
-        g="C"
-    elif a>=60:
-        g="D"
+for student in students:
+    marks_total = total_marks(student)
+    student_average = average(student)
+    if student_average >= 90:
+        grade = "A"
+    elif student_average >= 80:
+        grade = "B"
+    elif student_average >= 70:
+        grade = "C"
+    elif student_average >= 60:
+        grade = "D"
     else:
-        g="F"
-    print(d[i][0]+" "+str(s)+" "+str(a)+""+g)
+        grade = "F"
+    print(f"{student[0]} {marks_total} {student_average}{grade}")
 
-t2=0
-for i in range(0,len(d)):
-    s=f(d[i])
-    a=s/3
-    t2=t2+a
+average_sum = 0
+for student in students:
+    student_average = average(student)
+    average_sum = average_sum + student_average
 
-print("Classaverage:"+str(t2/len(d)))
+print(f"Classaverage:{average_sum / len(students)}")
 
-h=0
-n=""
-for i in range(0,len(d)):
-    s=f(d[i])
-    a=s/3
-    if a>h:
-        h=a
-        n=d[i][0]
-print("Topper: "+n+""+str(h))
+highest_average = 0
+topper_name = ""
+for student in students:
+    student_average = average(student)
+    if student_average > highest_average:
+        highest_average = student_average
+        topper_name = student[0]
+print(f"Topper: {topper_name}{highest_average}")
+
+above_average_count = count_students_above_class_average(students)
+print(f"Students above class average: {above_average_count}")
