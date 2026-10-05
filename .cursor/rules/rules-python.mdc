@@ -1,0 +1,12 @@
+---
+description:Pythoncodingstandardsforthiscourse
+globs: ["**/*.py"]
+alwaysApply: true
+---
+-Usedescriptivevariablenames.Singlelettersareallowedonly
+forloopcounters.
+-Everyfunctionhasaone-linedocstringstatingwhatitreturns.
+-Usef-stringsforoutput,never stringconcatenation.
+-Donothard-codeanumberthatisusedmorethanonce.Nameit.
+-Donotadd importsthatarenotused.
+-Donotadd featuresthatwerenotrequested.
